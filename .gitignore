@@ -1,0 +1,27 @@
+# Environments and Caches
+.env
+.venv
+env/
+venv/
+conflict-risk-env/
+__pycache__/
+.ipynb_checkpoints/
+.streamlit/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# ---------------------------------------------------
+# DATA DIRECTORIES
+# ---------------------------------------------------
+# Ignore all raw downloads (zips, gzips, massive TIFFs, Shapefiles, txt)
+data/raw/*
+
+# Ignore all interim pipeline data (Parquet files)
+data/interim/*
+
+# Ignore all processed data (GeoTIFFs, Parquets, XMLs) 
+# EXCEPT the trained XGBoost JSON models required for the Streamlit app
+data/processed/*
+!data/processed/*.json
