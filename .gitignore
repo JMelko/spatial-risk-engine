@@ -1,27 +1,36 @@
-# Environments and Caches
-.env
-.venv
-env/
-venv/
-conflict-risk-env/
-__pycache__/
-.ipynb_checkpoints/
-.streamlit/
+# Spatial and Data Files
+*.csv
+*.parquet
+*.tif
+*.tiff
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.geojson
+*.json
 
-# OS generated files
+# Ignore the entire data directory EXCEPT the placeholder file
+data/*
+!data/.gitkeep
+
+# Python caches and environments
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+env/
+.conda/
+
+# IDEs and OS files
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
 
-# ---------------------------------------------------
-# DATA DIRECTORIES
-# ---------------------------------------------------
-# Ignore all raw downloads (zips, gzips, massive TIFFs, Shapefiles, txt)
-data/raw/*
-
-# Ignore all interim pipeline data (Parquet files)
-data/interim/*
-
-# Ignore all processed data (GeoTIFFs, Parquets, XMLs) 
-# EXCEPT the trained XGBoost JSON models required for the Streamlit app
-data/processed/*
-!data/processed/*.json
+# Databases and API caches
+cache/
+*.sqlite
+*.db
