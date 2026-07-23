@@ -42,3 +42,50 @@ Null Model Baselining: Tests the environmental models against pure coordinate-me
 
 src/05_inference/
 The applied consulting module. Scripts simulated infrastructure footprints (e.g., Southwest Intertie Project), applies Right-of-Way (ROW) buffers, and utilizes the rasterstats library to calculate the exact acreage of "High Risk" habitat (HSI > 0.70) impacted by the proposed development.
+
+
+Installation & Environment Setup
+This pipeline requires a robust spatial and machine learning stack. An exact environment state is provided in environment.yml.
+
+1. Clone the repository:
+
+Bash
+git clone https://github.com/yourusername/az-nm-conflict-risk.git
+cd az-nm-conflict-risk
+2. Build the Conda Environment:
+This will install all necessary dependencies, including geopandas, rasterstats, shap, and CUDA-enabled xgboost.
+
+Bash
+conda env create -f environment.yml
+conda activate conflict-risk-env
+(Note: A local containerized deployment via Docker is also supported for complete OS and dependency isolation).
+
+Usage: Running a Risk Overlay
+To run a NEPA impact extraction on a new proposed infrastructure route:
+
+Place your proposed infrastructure shapefile or GPKG into the data/raw/ directory.
+
+Ensure the geometry is reprojected to CONUS Albers (EPSG:5070).
+
+Update the file path in src/05_inference/27_calculate_habitat_impacts.py.
+
+Execute the extraction script:
+
+Bash
+python src/05_inference/27_calculate_habitat_impacts.py
+Expected Output:
+The script will output an executive summary table detailing the impacted acreage for each species, ready for direct inclusion in regulatory documentation.
+
+Plaintext
+==================================================
+FINAL ENVIRONMENTAL IMPACT REPORT
+Project: Southwest Intertie Project (500kV)
+Threshold: HSI > 0.7
+==================================================
+             Species  High Risk Acres Impacted
+       Harris's Hawk                   3271.65
+         Mexican Jay                    279.55
+  Anna's Hummingbird                    381.63
+Yellow-billed Cuckoo                   1429.16*
+==================================================
+*Note: Macro-grid species represent Consultation Zones requiring targeted pedestrian surveys to delineate precise gallery boundaries.
